@@ -69,15 +69,13 @@ namespace StateMode
                     Console.WriteLine("Quarter returned");
                     break;
                 case GMState.NO_QUARTER:
-                    _state = GMState.HAS_QUARTER;
                     Console.WriteLine("You haven't inserted a quarter");
                     break;
                 case GMState.SOLD:
-                    // 正在出售时，不允许退钱
                     Console.WriteLine("Sorry, you already turned the crank.");
                     break;
                 case GMState.SOLD_OUT:
-                    // 理论上不会执行到这里，如果到达，说明程序有误.
+                    // 这里可能发生，因为EjectQuarter是个外部接口. 可以调用.
                     Console.WriteLine("You can't eject, you haven't inserted a quarter yet");
                     break;
             }
@@ -115,7 +113,26 @@ namespace StateMode
         /// </summary>
         private void Dispense()
         {
-
+            if (_state == GMState.SOLD)
+            {
+                // 发送糖果.
+                Console.WriteLine("A gumball comes rolling out the slot");
+                _count--;
+                if (_count == 0)
+                {
+                    Console.WriteLine("Oops, out of gamballs!");
+                    _state = GMState.SOLD_OUT;
+                }
+                else
+                {
+                    _state = GMState.NO_QUARTER;
+                }
+            }
+            else
+            {
+                // 其他状态不会调用到这里
+                // 玩家没有这个接口可以调用.
+            }
         }
     }
 
