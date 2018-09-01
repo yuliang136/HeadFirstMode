@@ -10,13 +10,24 @@ namespace Strategy
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Strategy");
+            //Console.WriteLine("Strategy");
 
-            Duck duck = new RubberDuck();
-            duck.Quack();
-            duck.Swim();
-            duck.Display();
-            duck.Fly();
+            //Duck duck = new RubberDuck();
+            //duck.PerformFly();
+            //duck.Display();
+
+            //Duck duck = new MallardDuck();
+            //duck.PerformFly();
+            //duck.PerformQuack();
+            //duck.Display();
+
+            Duck model = new ModelDuck();
+            model.PerformFly();
+
+            model.SetFlyBehavior(new FlyRocketPowered());
+
+            model.PerformFly();
+
         }
     }
 }

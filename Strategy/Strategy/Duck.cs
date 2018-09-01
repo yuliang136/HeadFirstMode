@@ -6,21 +6,29 @@ using System.Threading.Tasks;
 
 namespace Strategy
 {
-    abstract class Duck
+    public abstract class Duck
     {
-        public virtual void Quack()
+        public IFlyBehavior m_FlyBehavior;
+        public IQuackBehavior m_QuackBehavior;
+
+        public void PerformFly()
         {
-            Console.WriteLine("Duck quack");
+            m_FlyBehavior.Fly();
         }
 
-        public void Swim()
+        public void PerformQuack()
         {
-            Console.WriteLine("Duck swim");
+            m_QuackBehavior.Quack();
         }
 
-        public void Fly()
+        public void SetFlyBehavior(IFlyBehavior fb)
         {
-            Console.WriteLine("Duck fly");
+            m_FlyBehavior = fb;
+        }
+
+        public void SetQuackBehavior(IQuackBehavior qb)
+        {
+            m_QuackBehavior = qb;
         }
 
         public abstract void Display();
