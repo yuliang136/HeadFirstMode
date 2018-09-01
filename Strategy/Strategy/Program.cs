@@ -11,6 +11,12 @@ namespace Strategy
         static void Main(string[] args)
         {
             Console.WriteLine("Strategy");
+
+            Duck duck = new RubberDuck();
+            duck.Quack();
+            duck.Swim();
+            duck.Display();
+            duck.Fly();
         }
     }
 }
